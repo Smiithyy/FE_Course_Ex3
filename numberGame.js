@@ -53,6 +53,7 @@ function game() {
         attempts++;
 
         const result = checkGuess(playerGuess, numberToGuess);
+        console.log(`Your guess: ${playerGuess}`);
         console.log(`Attempt ${attempts}: ${result}`);
 
         if(result === "You guessed correctly!") {
