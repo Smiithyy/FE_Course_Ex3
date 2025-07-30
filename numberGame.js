@@ -37,14 +37,14 @@ function checkGuess(playerGuess, numberToGuess) {
 }
 
 //Play game
-function game() {
+function playGame() {
     let numberToGuess = generateRandomNumber();
     let attempts = 0
     const maxAttempts = 10;
     let playing = true;
     let guessedCorrect = false;
 
-    console.log("Welcome to the Evil AI number guessing game!");
+    console.log("New game starting.....");
     console.log("Try to defeat the AI by guessing the number between 1 and 100!");
     console.log("You only have 10 lives so think carefully...");
 
@@ -73,6 +73,31 @@ function game() {
         console.log(`The correct number was ${numberToGuess}`);
         console.log("Better luck next time!");
     }
+}
+
+//Ask player if they want to play again
+function replay() {
+    while(true) {
+        const input = prompt("Would you like to take on the Evil AI again? (yes/no)").toLowerCase();
+        if(input === "yes" || input === "y") {
+            return true;
+        }
+        else if(input === "no" || input === "n") {
+            return false;
+        }
+        else {
+            alert("Please enter 'yes' or 'no'!");
+        }
+    }
+}
+
+function game() {
+    console.log("Welcome to the Evil AI number guessing game!");
+    do {
+        playGame();
+    } while (replay());
+
+    console.log("Thanks for playing! Evil AI shutting down!");
 }
 
 game();
