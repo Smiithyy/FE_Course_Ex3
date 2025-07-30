@@ -64,6 +64,8 @@ function game() {
 
     if(guessedCorrect) {
         console.log(`CONGRATULATIONS, You defeated the Evil AI in ${attempts} attempt(s)!`);
+        const score = 100 - (attempts - 1) * 10;
+        console.log(`You scored ${score} points!`);
     }
     else {
         console.log(`You've used all ${maxAttempts} attempts.`);
