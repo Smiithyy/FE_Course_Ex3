@@ -37,7 +37,7 @@ function checkGuess(playerGuess, numberToGuess) {
 }
 
 //Play game
-function playGame() {
+function game() {
     let numberToGuess = generateRandomNumber();
     let attempts = 0
     const maxAttempts = 10;
@@ -91,13 +91,13 @@ function replay() {
     }
 }
 
-function game() {
+function playGame() {
     console.log("Welcome to the Evil AI number guessing game!");
     do {
-        playGame();
+        game();
     } while (replay());
 
     console.log("Thanks for playing! Evil AI shutting down!");
 }
 
-game();
+playGame();
