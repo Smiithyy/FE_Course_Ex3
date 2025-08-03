@@ -12,13 +12,17 @@ function getPlayerGuess() {
     
     while(true) {
         const input = prompt("Guess the number between 1-100: ");
+        if (input === null) {
+            alert("Game cancelled.");
+            return null;
+        }
+
         playerGuess = Number(input);
 
         if(!Number.isNaN(playerGuess) && playerGuess >= 1 && playerGuess <= 100) {
             return playerGuess;
-        }
-        else {
-            alert("Invalid guess. Please guess a number between 1-100")
+        } else {
+            alert("Invalid guess. Please guess a number between 1-100");
         }
     }
 }
@@ -50,8 +54,12 @@ function game() {
 
     while(attempts < maxAttempts) {
         const playerGuess = getPlayerGuess();
-        attempts++;
+        if (playerGuess === null) {
+            console.log("Game cancelled by player.");
+            return;
+        }
 
+        attempts++;
         const result = checkGuess(playerGuess, numberToGuess);
         console.log(`Your guess: ${playerGuess}`);
         console.log(`Attempt ${attempts}: ${result}`);
@@ -78,11 +86,17 @@ function game() {
 //Ask player if they want to play again
 function replay() {
     while(true) {
-        const input = prompt("Would you like to take on the Evil AI again? (yes/no)").toLowerCase();
-        if(input === "yes" || input === "y") {
+        const input = prompt("Would you like to take on the Evil AI again? (yes/no)");
+        if (input === null) {
+            alert("Game cancelled.");
+            return false;
+        }
+
+        const choice = input.toLowerCase();
+        if(choice === "yes" || choice === "y") {
             return true;
         }
-        else if(input === "no" || input === "n") {
+        else if(choice === "no" || choice === "n") {
             return false;
         }
         else {
@@ -92,10 +106,15 @@ function replay() {
 }
 
 function playGame() {
-    console.log("Welcome to the Evil AI number guessing game!");
-    do {
-        game();
-    } while (replay());
+    alert("Press Ctrl+Shift+I to open the console.");
+
+    try {
+        do {
+            game();
+        } while (replay());
+    } catch(e) {
+        console.log("Game ended: " + e.message);
+    }
 
     console.log("Thanks for playing! Evil AI shutting down!");
 }
